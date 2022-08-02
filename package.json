@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "yargs": "^17.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  },
+  "name": "nodejs-demo",
+  "version": "0.0.1",
+  "description": "NodeJS-Demo-Project",
+  "main": "server.mjs",
+  "scripts": {
+    "dev-server" : "nodemon server.mjs"
+  },
+  "keywords": [
+    "NodeJS",
+    "Demo",
+    "Learning"
+  ],
+  "author": "Ashutosh",
+  "license": "MIT"
+}
