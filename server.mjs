@@ -16,6 +16,8 @@ http
 
         const response = util.format("The path is: %s and query: %s, on a OS: %s with current time: %s and Name: %s", parse.pathname, parse.query, os.platform, getDateTime(), applicationName);
 
+        console.log(response);
+
         res.end(response);
     })
     .listen(port, ()=>{
