@@ -1,25 +1,19 @@
-import http from "http";
-import url from "url";
-import util from "util";
-import os from "os";
-import chalk, { chalkStderr } from "chalk";
+import express, { response } from "express";
 
-import { getDateTime, applicationName } from "./time/index.mjs";
+const app = express();
 
-const port = 5000;
+// POST         Create
+// GET          Read
+// PUT PATCH    Update
+// DELETE       Delete
 
-http
-    .createServer((req, res) => {
+app.get("/", (req, res)=>{
+    res.send("Hello World!!!");
+})
+app.get("/products", (req, res)=>{
+    res.send("This is the products page");
+})
 
-        const requestPath = req.url;
-        const parse = url.parse(requestPath);
-
-        const response = util.format("The path is: %s and query: %s, on a OS: %s with current time: %s and Name: %s", parse.pathname, parse.query, os.platform, getDateTime(), applicationName);
-
-        console.log(response);
-
-        res.end(response);
-    })
-    .listen(port, ()=>{
-        console.log(chalk.bgGreen(chalk.yellow("Server started...")) + chalk.bold(port));
-    });
+app.listen(3000, ()=>{
+    console.log("Server has started at port 3000");
+})
