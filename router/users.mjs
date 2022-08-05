@@ -1,19 +1,32 @@
 import express from "express";
 import axios from "axios";
 
+// W ejs
 const Router = express.Router();
 
 Router.get("/", async (req, res)=>{
     try {
         const response = await axios.get("https://jsonplaceholder.typicode.com/users");
-        res.json(response.data);
+        res.render("users", { users : response.data })
     } catch (error) {
         res.status(500).send("Internal server error");
     }
 })
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------
-// W/O azios
+// W axios
+// const Router = express.Router();
+
+// Router.get("/", async (req, res)=>{
+//     try {
+//         const response = await axios.get("https://jsonplaceholder.typicode.com/users");
+//         res.json(response.data);
+//     } catch (error) {
+//         res.status(500).send("Internal server error");
+//     }
+// })
+
+// W/O axios
 // import https from "https";
 
 // const Router = express.Router();

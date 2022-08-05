@@ -3,31 +3,47 @@ import fs from "fs";
 
 const Router = express.Router();
 
-Router.get("/", (req, res) => {
-    fs.readFile("./phonebook.json", (err, data) => {
-        if (err) {
-            res.status(500).send("Internal Server Error.");
-            return false;
-        }
-        res.setHeader("content-type", "application/json");
-        res.send(data);
-    })
+Router.get("/", async (req, res)=>{
+    try {
+        fs.readFile("./phonebook.json", (err, data) => {
+            if (err) {
+                res.status(500).send("Internal Server Error.");
+                return false;
+            }
+            res.render("home", { homeUsers : JSON.parse(data) })
+        })
+    } catch (error) {
+        res.status(500).send("Internal server error");
+    }
 })
 
-Router.post("/", (req, res) => {
-    fs.readFile("./phonebook.json", (err, data) => {
-        if (err) {
-            res.status(500).send("Internal Server Error.");
-            return false;
-        }
-        const content = JSON.parse(data);
+// const Router = express.Router();
 
-        content.push(req.body);
+// Router.get("/", (req, res) => {
+//     fs.readFile("./phonebook.json", (err, data) => {
+//         if (err) {
+//             res.status(500).send("Internal Server Error.");
+//             return false;
+//         }
+//         res.setHeader("content-type", "application/json");
+//         res.send(data);
+//     })
+// })
 
-        fs.writeFile("./phonebook.json", JSON.stringify(content), () => {
-            res.send(content);
-        });
-    });
-});
+// Router.post("/", (req, res) => {
+//     fs.readFile("./phonebook.json", (err, data) => {
+//         if (err) {
+//             res.status(500).send("Internal Server Error.");
+//             return false;
+//         }
+//         const content = JSON.parse(data);
+
+//         content.push(req.body);
+
+//         fs.writeFile("./phonebook.json", JSON.stringify(content), () => {
+//             res.send(content);
+//         });
+//     });
+// });
 
 export default Router;

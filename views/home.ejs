@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/scripts.ejs') %>
+  <body>
+    <%- include('partials/homeHeader.ejs') %>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <table class="table table-striped">
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+            </tr>
+
+            <% for(let i=0; i < homeUsers.length; i++) { 
+                const user = homeUsers[i]
+            %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td><%= user.mobile %></td>
+            </tr>
+            <% } %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
