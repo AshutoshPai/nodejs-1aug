@@ -2,7 +2,7 @@ const fs = require("fs");
 
 // Async
 console.log("Async reading file");
-fs.readFile("././phonebook.json", (err, data)=>{
+fs.readFile("./phonebook.json", (err, data)=>{
     console.log(`Async File content - ${data}`);
 })
 console.log("Async ending file");
