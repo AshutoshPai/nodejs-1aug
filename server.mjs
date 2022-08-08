@@ -2,6 +2,7 @@ import express from "express";
 import HomepageRouter from "./router/homepage.mjs";
 import ProductsRouter from "./router/products.mjs";
 import UsersRouter from "./router/users.mjs";
+import UsersDBRouter from "./router/usersDB.mjs";
 
 const app = express();
 
@@ -18,6 +19,7 @@ const PORT = process.env.PORT || 3000;
 app.use("/", HomepageRouter);
 app.use("/products", ProductsRouter);
 app.use("/users", UsersRouter);
+app.use("/usersDB", UsersDBRouter);
 
 app.listen(PORT, () => {
     console.log(`Server has started at port ${PORT}`);
