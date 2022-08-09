@@ -54,7 +54,21 @@ Router.put("/:id", async (req, res)=>{
     await client.connect();
     const db = client.db("nodeJsTraining");
     const collection = db.collection("products");
-    const updateDoc = await collection.updateMany({_id : ObjectID(id)}, {$set : body});
+    const updateDoc = await collection.updateOne({_id : ObjectID(id)}, {$set : body});
+    client.close();
+
+    res.json(updateDoc);
+})
+
+// PUT with new field to all doc
+Router.put("/", async (req, res)=>{
+    const body = req.body;
+
+    const client = createClient();
+    await client.connect();
+    const db = client.db("nodeJsTraining");
+    const collection = db.collection("products");
+    const updateDoc = await collection.updateMany({}, {$set : body});
     client.close();
 
     res.json(updateDoc);
