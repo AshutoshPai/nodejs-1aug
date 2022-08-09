@@ -45,4 +45,33 @@ Router.post("/", async (req, res)=>{
     res.json(insertDocs);
 })
 
+// PUT
+Router.put("/:id", async (req, res)=>{
+    const id = req.params.id;
+    const body = req.body;
+
+    const client = createClient();
+    await client.connect();
+    const db = client.db("nodeJsTraining");
+    const collection = db.collection("products");
+    const updateDoc = await collection.updateMany({_id : ObjectID(id)}, {$set : body});
+    client.close();
+
+    res.json(updateDoc);
+})
+
+// Delete with ID
+Router.delete("/:id", async (req, res)=>{
+    const id = req.params.id;
+
+    const client = createClient();
+    await client.connect();
+    const db = client.db("nodeJsTraining");
+    const collection = db.collection("products");
+    const doc = await collection.deleteOne({_id : ObjectID(id)});
+    client.close();
+
+    res.json(doc);
+})
+
 export default Router;
