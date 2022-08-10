@@ -1,6 +1,6 @@
 import { ObjectID } from "bson";
 import express from "express";
-import { createClient } from "../utils/db.mjs";
+import { createClient } from "../../utils/db.mjs";
 
 const Router = express.Router();
 
@@ -14,7 +14,9 @@ Router.get("/", async (req, res) => {
         const docs = await collection.find().toArray();
         client.close();
 
-        res.json(docs);
+        res.render("productsDB", { products : docs })
+
+        // res.json(docs);
     } catch (error) {
         res.status(500).json({ message: "Internal server error" });
     }

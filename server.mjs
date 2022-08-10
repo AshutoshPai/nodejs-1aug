@@ -1,9 +1,11 @@
 import express from "express";
 import HomepageRouter from "./router/homepage.mjs";
-import ProductsRouter from "./router/products.mjs";
-import ProductsDBRouter from "./router/productsDB.mjs";
 import UsersRouter from "./router/users.mjs";
-import UsersDBRouter from "./router/usersDB.mjs";
+import ProductsRouter from "./router/products.mjs";
+
+import HomepageDBRouter from "./router/DB/homepageDB.mjs";
+import UsersDBRouter from "./router/DB/usersDB.mjs";
+import ProductsDBRouter from "./router/DB/productsDB.mjs";
 
 const app = express();
 
@@ -18,10 +20,12 @@ const PORT = process.env.PORT || 3000;
 // DELETE       Delete
 
 app.use("/", HomepageRouter);
-app.use("/products", ProductsRouter);
-app.use("/users", UsersRouter);
-app.use("/usersDB", UsersDBRouter);
-app.use("/productsDB", ProductsDBRouter);
+app.use("/Users", UsersRouter);
+app.use("/Products", ProductsRouter);
+
+app.use("/db", HomepageDBRouter);
+app.use("/db/users", UsersDBRouter);
+app.use("/db/products", ProductsDBRouter);
 
 app.listen(PORT, () => {
     console.log(`Server has started at port ${PORT}`);
