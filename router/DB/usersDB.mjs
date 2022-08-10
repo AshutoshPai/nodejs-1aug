@@ -1,23 +1,35 @@
 import express from "express";
 import { createClient } from "../../utils/db.mjs";
+import { UserModel } from "../../models/users.mjs"
 
 const Router = express.Router();
 
 // GET
-Router.get("/", async (req, res)=>{
+Router.get("/", async (req, res) => {
     try {
-        const client = createClient();
-        await client.connect();
-        const db = client.db("nodeJsTraining");
-        const collection = db.collection("users");
-
-        const docs = await collection.find().toArray();
-
-        res.render("usersDB", { users : docs })
+        const usersa = await UserModel.find();
+        res.render("users", { users : usersa })
     } catch (error) {
-        res.status(500).send("Internal server error");
+        res.status(500).send("Internal server error.");
     }
-})
+    
+});
+
+// // GET
+// Router.get("/", async (req, res)=>{
+//     try {
+//         const client = createClient();
+//         await client.connect();
+//         const db = client.db("nodeJsTraining");
+//         const collection = db.collection("users");
+
+//         const docs = await collection.find().toArray();
+
+//         res.render("usersDB", { users : docs })
+//     } catch (error) {
+//         res.status(500).send("Internal server error");
+//     }
+// })
 
 // POST
 Router.post("/", async (req, res) => {

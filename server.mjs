@@ -7,6 +7,8 @@ import HomepageDBRouter from "./router/DB/homepageDB.mjs";
 import UsersDBRouter from "./router/DB/usersDB.mjs";
 import ProductsDBRouter from "./router/DB/productsDB.mjs";
 
+import "./utils/mongoose-db.mjs"
+
 const app = express();
 
 app.use(express.json());
