@@ -7,12 +7,33 @@ const Router = express.Router();
 // GET
 Router.get("/", async (req, res) => {
     try {
-        const usersa = await UserModel.find();
-        res.render("users", { users : usersa })
+        const users = await UserModel.find();
+        res.render("usersDB", { users : users })
     } catch (error) {
         res.status(500).send("Internal server error.");
     }
     
+});
+
+// GET
+Router.get("/add-user", (req, res)=>{
+    res.render("addUsers");
+})
+
+// POST
+Router.post("/add-user", async (request, response) => {
+    try {
+        const body = request.body;
+
+        const newUser = new UserModel(body)
+
+        await newUser.save()
+
+        response.redirect("/db/users")
+    } catch (error) {
+        console.log(error);
+        response.status(500).send("Internal server error.");
+    }
 });
 
 // // GET
