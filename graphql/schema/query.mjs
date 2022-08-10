@@ -33,6 +33,7 @@ const CompanyType = new GraphQLObjectType({
 const UserType = new GraphQLObjectType({
     name: "User",
     fields: {
+        _id: { type: GraphQLString },
         name: { type: GraphQLString },
         email: { type: GraphQLString },
         username: { type: GraphQLString },
@@ -50,6 +51,14 @@ export const Query = new GraphQLObjectType({
             type: GraphQLList(UserType),
             resolve: () => {
                 return UserModel.find();
+            }
+        },
+
+        user: {
+            type: UserType,
+            args: { id : { type: GraphQLString } },
+            resolve: (content, args) => {
+                return UserModel.findById(args.id);
             }
         }
     }
