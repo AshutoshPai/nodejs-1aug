@@ -13,13 +13,29 @@ export const Query = new GraphQLObjectType({
             }
         },
 
+        // GraphQL
+        // {
+        //     users {
+        //         _id
+        //         name
+        //     }
+        // }
+
         user: {
             type: UserType,
-            args: { id : { type: GraphQLString } },
+            args: { id: { type: GraphQLString } },
             resolve: (content, args) => {
                 return UserModel.findById(args.id);
             }
         }
+
+        // GraphQL With ID
+        // {
+        //     user(id : "62f2018749dfdf9a9f870c20") {
+        //         _id
+        //         name
+        //     }
+        // }
     }
 })
 
