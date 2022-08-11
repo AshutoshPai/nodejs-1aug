@@ -1,26 +1,50 @@
-// Spread operator
-const person = {
-    name: "Ashutosh",
-    location: "Bangalore"
+// Objest Destructuring
+const response = {
+    name: "ashutosh",
+    address: {
+        city: "Bangalore",
+    },
+    job: {
+        title: "Engineer"
+    }
 }
 
-const job = {
-    title: "Engineer",
-    exp: "2.5"
-}
+const city = "Delhi";
 
-// const personAndJob = {
-//     name: person.name,
-//     location: person.location,
-//     title: job.title,
-//     exp: job.exp
+// const city = response.address.city;
+
+const { address} = response;
+const { city : location } = address;
+
+console.log(address);
+console.log(city);
+console.log(location)
+
+//-------------------------------------------------------------------------------------------------------------------------------------
+// // Spread operator
+// const person = {
+//     name: "Ashutosh",
+//     location: "Bangalore"
 // }
 
-// const personAndJob = Object.assign({}, person, job)
+// const job = {
+//     title: "Engineer",
+//     exp: "2.5"
+// }
 
-const personAndJob = {...person, ...job}
+// // const personAndJob = {
+// //     name: person.name,
+// //     location: person.location,
+// //     title: job.title,
+// //     exp: job.exp
+// // }
 
-console.log(personAndJob);
+// // const personAndJob = Object.assign({}, person, job)
+
+// const personAndJob = {...person, ...job}
+
+// console.log(personAndJob);
+//-------------------------------------------------------------------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------------------------------------------------------------------
 // // Template literals
@@ -30,6 +54,7 @@ console.log(personAndJob);
 
 // console.log(message);
 //-------------------------------------------------------------------------------------------------------------------------------------
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------
 // // // This Keyword
@@ -60,6 +85,7 @@ console.log(personAndJob);
 // // const tesla = new Car();
 // // tesla.drive();
 //-------------------------------------------------------------------------------------------------------------------------------------
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------
 // // // // Arrow function are optimized function code but similar to normal function
@@ -98,6 +124,7 @@ console.log(personAndJob);
 
 // // // console.log(add(1, 5))
 //-------------------------------------------------------------------------------------------------------------------------------------
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------
 // // // // var a = "abc";
