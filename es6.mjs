@@ -1,3 +1,11 @@
+// Template literals
+
+const firstName = "Ashutosh";
+
+const message = `Hello ${firstName}. The time is ${new Date().toLocaleDateString()}`;
+
+console.log(message);
+
 // // This Keyword
 
 // // w/o Arrow function
