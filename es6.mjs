@@ -1,3 +1,41 @@
+// Arrow function are optimized function code but similar to normal function
+
+
+// w/o arrow function
+// setTimeout(function(){
+//     console.log("1sec");
+// }, 1000)
+
+// function currentTimestamp(){
+//     return new Date().toISOString();
+// }
+
+// function createRandomNumber(limit){
+//     return Math.round(Math.random() * limit);
+// }
+
+// function add(a, b) {
+//     return a+b;
+// }
+
+// w arrow function
+setTimeout(()=>{
+    console.log("1sec");
+}, 1000)
+
+const currentTimestamp = () => new Date().toISOString();
+
+const createRandomNumber = limit => Math.round(Math.random() * limit);
+
+const add = (a, b) => a + b;
+
+// console
+console.log(currentTimestamp())
+
+console.log(createRandomNumber(100));
+
+console.log(add(1, 5))
+
 // var a = "abc";
 // let nameUsingLet = "asdfghjkl" 
 // const nameWithUsingConst = "qaswedfrtghy"; // const value cant be changes after declaration
