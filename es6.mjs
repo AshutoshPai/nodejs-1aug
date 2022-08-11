@@ -1,116 +1,143 @@
-// Template literals
+// Spread operator
+const person = {
+    name: "Ashutosh",
+    location: "Bangalore"
+}
 
-const firstName = "Ashutosh";
+const job = {
+    title: "Engineer",
+    exp: "2.5"
+}
 
-const message = `Hello ${firstName}. The time is ${new Date().toLocaleDateString()}`;
+// const personAndJob = {
+//     name: person.name,
+//     location: person.location,
+//     title: job.title,
+//     exp: job.exp
+// }
 
-console.log(message);
+// const personAndJob = Object.assign({}, person, job)
 
-// // This Keyword
+const personAndJob = {...person, ...job}
 
-// // w/o Arrow function
+console.log(personAndJob);
+
+//-------------------------------------------------------------------------------------------------------------------------------------
+// // Template literals
+// const firstName = "Ashutosh";
+
+// const message = `Hello ${firstName}. The time is ${new Date().toLocaleDateString()}`;
+
+// console.log(message);
+//-------------------------------------------------------------------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------------------------------------------------------------------
+// // // This Keyword
+// // // w/o Arrow function
+// // // class Car {
+// // //     name = "Tesla";
+// // //     drive() {
+// // //         // console.log(this, "class");
+// // //         const _this = this
+// // //         setTimeout(function(){
+// // //             // console.log(this.name)
+// // //             // console.log(this, "setTimeout");
+// // //             console.log(_this.name);   
+// // //         })
+// // //     }
+// // // }
+
+// // // w Arrow function
 // // class Car {
 // //     name = "Tesla";
 // //     drive() {
-// //         // console.log(this, "class");
-// //         const _this = this
-// //         setTimeout(function(){
-// //             // console.log(this.name)
-// //             // console.log(this, "setTimeout");
-// //             console.log(_this.name);   
+// //         setTimeout(()=>{
+// //             console.log(this.name)
 // //         })
 // //     }
 // // }
 
-// // w Arrow function
-// class Car {
-//     name = "Tesla";
-//     drive() {
-//         setTimeout(()=>{
-//             console.log(this.name)
-//         })
-//     }
-// }
+// // const tesla = new Car();
+// // tesla.drive();
+//-------------------------------------------------------------------------------------------------------------------------------------
 
-// const tesla = new Car();
-// tesla.drive();
+//-------------------------------------------------------------------------------------------------------------------------------------
+// // // // Arrow function are optimized function code but similar to normal function
+// // // // w/o arrow function
+// // // // setTimeout(function(){
+// // // //     console.log("1sec");
+// // // // }, 1000)
 
-// // // Arrow function are optimized function code but similar to normal function
+// // // // function currentTimestamp(){
+// // // //     return new Date().toISOString();
+// // // // }
 
-// // // w/o arrow function
-// // // setTimeout(function(){
+// // // // function createRandomNumber(limit){
+// // // //     return Math.round(Math.random() * limit);
+// // // // }
+
+// // // // function add(a, b) {
+// // // //     return a+b;
+// // // // }
+
+// // // // w arrow function
+// // // setTimeout(()=>{
 // // //     console.log("1sec");
 // // // }, 1000)
 
-// // // function currentTimestamp(){
-// // //     return new Date().toISOString();
-// // // }
+// // // const currentTimestamp = () => new Date().toISOString();
 
-// // // function createRandomNumber(limit){
-// // //     return Math.round(Math.random() * limit);
-// // // }
+// // // const createRandomNumber = limit => Math.round(Math.random() * limit);
 
-// // // function add(a, b) {
-// // //     return a+b;
-// // // }
+// // // const add = (a, b) => a + b;
 
-// // // w arrow function
-// // setTimeout(()=>{
-// //     console.log("1sec");
-// // }, 1000)
+// // // // console
+// // // console.log(currentTimestamp())
 
-// // const currentTimestamp = () => new Date().toISOString();
+// // // console.log(createRandomNumber(100));
 
-// // const createRandomNumber = limit => Math.round(Math.random() * limit);
+// // // console.log(add(1, 5))
+//-------------------------------------------------------------------------------------------------------------------------------------
 
-// // const add = (a, b) => a + b;
+//-------------------------------------------------------------------------------------------------------------------------------------
+// // // // var a = "abc";
+// // // // let nameUsingLet = "asdfghjkl"
+// // // // const nameWithUsingConst = "qaswedfrtghy"; // const value cant be changes after declaration
+// // // // a = "def";
+// // // // console.log(a);
 
-// // // console
-// // console.log(currentTimestamp())
+// // // // if (1== 1) {
+// // // //     nameUsingLet = "qwsaerfdtyhg";
+// // // //     // nameWithUsingConst = "wsaqrfdeyhgt";
+// // // //     // const nameWithUsingConstInsideALoop = "qaswedfrtghy"; // const cant be accessed outside loops if declared inside loop similar to let
+// // // // }
 
-// // console.log(createRandomNumber(100));
+// // // // console.log(nameUsingLet)
 
-// // console.log(add(1, 5))
+// // // // if (true) {
+// // // //     var b = "ghi"; // This can be globally accessed
+// // // //     let bInsideIfCondition = "qwertyuio"; // This can't be globally accessed
+// // // // }
 
-// // // var a = "abc";
-// // // let nameUsingLet = "asdfghjkl"
-// // // const nameWithUsingConst = "qaswedfrtghy"; // const value cant be changes after declaration
-// // // a = "def";
-// // // console.log(a);
+// // // // for (var index = 0; index < 10; index++) { // Here, as index is declared as var, the for loop runs then the console is printed. So the setTimout prints the last index value which is 10
+// // // //     setTimeout(()=>{
+// // // //         console.log(index)
+// // // //     }, 0)
+// // // // }
 
-// // // if (1== 1) {
-// // //     nameUsingLet = "qwsaerfdtyhg";
-// // //     // nameWithUsingConst = "wsaqrfdeyhgt";
-// // //     // const nameWithUsingConstInsideALoop = "qaswedfrtghy"; // const cant be accessed outside loops if declared inside loop similar to let
-// // // }
+// // // // for (let index = 0; index < 10; index++) { // ES6 introduced let
+// // // //     setTimeout(()=>{
+// // // //         console.log(index)
+// // // //     }, 0)
+// // // // }
 
-// // // console.log(nameUsingLet)
+// // // // function c() {
+// // // //     var name = "ashutosh"; // accessable only inside the function
+// // // // }
+// // // // c();
 
-
-// // // if (true) {
-// // //     var b = "ghi"; // This can be globally accessed
-// // //     let bInsideIfCondition = "qwertyuio"; // This can't be globally accessed
-// // // }
-
-// // // for (var index = 0; index < 10; index++) { // Here, as index is declared as var, the for loop runs then the console is printed. So the setTimout prints the last index value which is 10
-// // //     setTimeout(()=>{
-// // //         console.log(index)
-// // //     }, 0)
-// // // }
-
-// // // for (let index = 0; index < 10; index++) { // ES6 introduced let
-// // //     setTimeout(()=>{
-// // //         console.log(index)
-// // //     }, 0)
-// // // }
-
-// // // function c() {
-// // //     var name = "ashutosh"; // accessable only inside the function
-// // // }
-// // // c();
-
-
-// // // console.log(b);
-// // // // console.log(name);
-// // // console.log(nameUsingLet);
-// // // // console.log(bInsideIfCondition);
+// // // // console.log(b);
+// // // // // console.log(name);
+// // // // console.log(nameUsingLet);
+// // // // // console.log(bInsideIfCondition);
+//-------------------------------------------------------------------------------------------------------------------------------------
