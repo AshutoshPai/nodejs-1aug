@@ -1,6 +1,7 @@
 import express from "express";
 import { createClient } from "../../utils/db.mjs";
 import { UserModel } from "../../models/users.mjs"
+import validator from "validator"
 
 const Router = express.Router();
 
@@ -8,15 +9,15 @@ const Router = express.Router();
 Router.get("/", async (req, res) => {
     try {
         const users = await UserModel.find();
-        res.render("usersDB", { users : users })
+        res.render("usersDB", { users: users })
     } catch (error) {
         res.status(500).send("Internal server error.");
     }
-    
+
 });
 
 // GET
-Router.get("/add-user", (req, res)=>{
+Router.get("/add-user", (req, res) => {
     res.render("addUsers");
 })
 
@@ -24,6 +25,29 @@ Router.get("/add-user", (req, res)=>{
 Router.post("/add-user", async (request, response) => {
     try {
         const body = request.body;
+
+        const { name, email, username, phone, address, website, company } = body;
+
+        if (validator.isEmpty(name)) {
+            response.status(401).send("Name not provided.");
+            return false;
+        }
+
+        if (!validator.isEmail(email)) {
+            response.status(401).send("Email is not correct.");
+            return false;
+        }
+
+
+        if (validator.isEmpty(username)) {
+            response.status(401).send("Username not provided.");
+            return false;
+        }
+
+        if (validator.isEmpty(phone)) {
+            response.status(401).send("Phone number not provided.");
+            return false;
+        }
 
         const newUser = new UserModel(body)
 
