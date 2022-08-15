@@ -20,7 +20,8 @@ const UserSchema = mongoose.Schema({
         name: String,
         catchPhrase: String,
         bs: String
-    }
+    },
+    password : { required : true, type : String }
 }, {
     versionKey: false
 })
