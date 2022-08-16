@@ -55,7 +55,11 @@ app.use("/graphql", graphql.graphqlHTTP({
 
 io.on("connection", (socket)=>{
     socket.on("chat-message", (message)=>{
-        io.emit("message", message)
+        // Single chat
+        // io.emit("message", message)
+
+        // Group messages
+        socket.broadcast.emit("message", message);
     })
 })
 
