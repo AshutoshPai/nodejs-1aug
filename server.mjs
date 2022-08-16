@@ -1,3 +1,4 @@
+import "dotenv/config"
 import express from "express";
 import HomepageRouter from "./router/homepage.mjs";
 import UsersRouter from "./router/users.mjs";

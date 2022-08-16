@@ -3,8 +3,8 @@ import { UserModel } from "../../models/users.mjs"
 import validator from "validator"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
+import AuthMiddleware from "../../middlewares/auth.mjs";
 
-const SECRET_KEY = "3lj12h123k213j1l23n21kl312kl312n3kl21nasdkj";
 const Router = express.Router();
 
 // GET
@@ -70,7 +70,7 @@ Router.post("/login", async (req, res) => {
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if (isPasswordValid) {
-            const token = jwt.sign({ id: user._id }, SECRET_KEY, { expiresIn: 3600, algorithm: "HS512" })
+            const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: 3600, algorithm: "HS512" })
             res.json({ message: `Welcome ${email}`, token })
         } else {
             res.status(401).json({ message: "Email and Password not matching" })
@@ -80,12 +80,9 @@ Router.post("/login", async (req, res) => {
     }
 })
 
-Router.get("/whoami", async (req, res) => {
-    const { headers } = req;
-    const { authorization } = headers;
+Router.get("/whoami", AuthMiddleware, async (req, res) => {
     try {
-        const payload = jwt.verify(authorization, SECRET_KEY);
-        const user = await UserModel.findById(payload.id, "-password");
+        const { user } = req;
         res.send(user);
     } catch (error) {
         res.status(401).json({ message: " Invalid user" })
