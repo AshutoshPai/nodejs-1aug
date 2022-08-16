@@ -54,7 +54,9 @@ app.use("/graphql", graphql.graphqlHTTP({
 }))
 
 io.on("connection", (socket)=>{
-    console.log("user connected");
+    socket.on("chat-message", (message)=>{
+        io.emit("message", message)
+    })
 })
 
 server.listen(PORT, () => {
