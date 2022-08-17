@@ -44,26 +44,28 @@ app.use("/db/products", ProductsDBRouter);
 
 app.use("/api/users", UserAPIRouter);
 
-app.get("/chat", (req, res)=>{
+app.get("/chat", (req, res) => {
     res.render("chat")
-  })
+})
 
 app.use("/graphql", graphql.graphqlHTTP({
     graphiql: true,
     schema: Schema
 }))
 
-io.on("connection", (socket)=>{
-    socket.on("chat-message", (message)=>{
-        // Single chat
+io.on("connection", (socket) => {
+    socket.on("chat-message", (message) => {
+        // Group messages with all users on server
         // io.emit("message", message)
 
-        // Group messages
-        socket.broadcast.emit("message", message);
+        // Group chat - except the sender.
+        if (socket.data.username && message) {
+            socket.broadcast.emit("message", { message: message, user: socket.data.username });
+        }
     });
 
     socket.on("login", (message) => {
-        socket.data = { username : message };
+        socket.data = { username: message };
         socket.broadcast.emit("newuser", message);
     })
 })
