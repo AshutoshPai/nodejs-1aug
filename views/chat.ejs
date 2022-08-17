@@ -1,45 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('partials/scripts.ejs') %>
+<%- include('partials/scripts.ejs') %>
+
   <body>
     <%- include('partials/homeHeader.ejs') %>
-    <script src="/js/socketio.js"></script>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <form id="chat-form">
-            <p>
-              <input id="chat-message" name="chat-message" />
-              <button>Send</button>
-            </p>
-          </form>
-          <ul id="messages">
-
-          </ul>
+      <script src="/js/socketio.js"></script>
+      <style>
+        #chat-form {
+          display: none;
+        }
+      </style>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="col">
+              <ul id="users"></ul>
+            </div>
+            <form id="chat-form">
+              <p>
+                <input id="chat-message" name="chat-message" />
+                <button>Send</button>
+              </p>
+            </form>
+            <form id="login-form">
+              <p>
+                <input id="username" name="username" />
+                <button>Login</button>
+              </p>
+            </form>
+          </div>
+          <div class="col">
+            <ul id="messages"></ul>
+          </div>
         </div>
       </div>
-    </div>
-    <script>
-      const socket = io();
-      
-      const form = document.getElementById("chat-form");
-      const input = document.getElementById("chat-message");
-      const messages = document.getElementById("messages");
+      <script>
+        const socket = io();
 
-      form.addEventListener("submit", (e)=>{
-        e.preventDefault();
+        const chatForm = document.getElementById("chat-form");
+        const input = document.getElementById("chat-message");
+        const messages = document.getElementById("messages");
 
-        if (input.value !== "") {
-          socket.emit("chat-message", input.value);
-          input.value = "";
-        }
-      });
+        const loginForm = document.getElementById("login-form");
+        const username = document.getElementById("username");
 
-      socket.on("message", (message)=>{
-        const chatMessage = document.createElement("li");
-        chatMessage.innerText = message;
-        messages.appendChild(chatMessage);
-      })
-    </script>
+        const usersList = document.getElementById("users");
+
+        loginForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (username.value !== "") {
+            socket.emit("login", username.value);
+            username.value = "";
+            loginForm.style.display = "none";
+            chatForm.style.display = "block";
+          }
+        })
+
+        chatForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (input.value !== "") {
+            socket.emit("chat-message", input.value);
+            input.value = "";
+          }
+        });
+
+        socket.on("message", (message) => {
+          const chatMessage = document.createElement("li");
+          chatMessage.innerText = message;
+          messages.appendChild(chatMessage);
+        })
+
+        socket.on("newuser", (name) => {
+          const newuser = document.createElement("li");
+          newuser.innerText = name;
+          usersList.appendChild(newuser);
+        })
+      </script>
   </body>
+
 </html>

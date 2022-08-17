@@ -60,6 +60,11 @@ io.on("connection", (socket)=>{
 
         // Group messages
         socket.broadcast.emit("message", message);
+    });
+
+    socket.on("login", (message) => {
+        socket.data = { username : message };
+        socket.broadcast.emit("newuser", message);
     })
 })
 
