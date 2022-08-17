@@ -67,6 +67,10 @@ io.on("connection", (socket) => {
     socket.on("login", (message) => {
         socket.data = { username: message };
         socket.broadcast.emit("newuser", message);
+    });
+
+    socket.on("typing", (typing) => {
+        socket.broadcast.emit("typingnow", { typing, username : socket.data.username });
     })
 })
 
