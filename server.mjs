@@ -15,7 +15,7 @@ import "./utils/mongoose-db.mjs"
 import * as graphql from "express-graphql"
 import { Schema } from "./graphql/schema/query.mjs";
 
-const app = express();
+export const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded( { extended : true } ))
